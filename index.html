@@ -4,6 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat App - Login/Signup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .form-wrapper {
+            display: none;
+        }
+
+        .form-wrapper.active, .form-wrapper:not(.hidden) {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            color: #777;
+        }
+
+        p .toggle-form {
+            color: #007bff;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        p .toggle-form:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 15px;
+                width: 90%;
+                max-width: none;
+            }
+
+            .input-group input {
+                font-size: 16px;
+            }
+
+            .btn {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .input-group input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="auth-container">
@@ -75,89 +193,5 @@
             window.location.href = 'chat.html';
         });
     </script>
-    <style>
-        body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.auth-container {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 350px;
-}
-
-.form-wrapper {
-    display: none;
-}
-
-.form-wrapper.active, .form-wrapper:not(.hidden) {
-    display: block;
-}
-
-h2 {
-    margin-bottom: 20px;
-    color: #333;
-    font-weight: 600;
-    text-align: center;
-}
-
-.input-group {
-    margin-bottom: 20px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.input-group input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-}
-
-.btn {
-    width: 100%;
-    padding: 10px;
-    background: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn:hover {
-    background: #0056b3;
-}
-
-p {
-    text-align: center;
-    color: #777;
-}
-
-p .toggle-form {
-    color: #007bff;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-p .toggle-form:hover {
-    text-decoration: underline;
-}
-    </style>
 </body>
 </html>

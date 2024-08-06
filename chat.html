@@ -3,188 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App - Global Chat</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Chat App - Login/Signup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .form-wrapper {
+            display: none;
+        }
+
+        .form-wrapper.active, .form-wrapper:not(.hidden) {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            color: #777;
+        }
+
+        p .toggle-form {
+            color: #007bff;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        p .toggle-form:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 15px;
+                width: 90%;
+                max-width: none;
+            }
+
+            .input-group input {
+                font-size: 16px;
+            }
+
+            .btn {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .input-group input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="sidebar">
-            <div class="profile">
-                <img src="avatar.png" alt="Avatar" class="avatar">
-                <h3>Username</h3>
-            </div>
-            <nav>
-                <h2>Friends</h2>
-                <ul class="friend-list">
-                    <li>Friend 1 <button class="btn-unfriend">Unfriend</button></li>
-                    <li>Friend 2 <button class="btn-unfriend">Unfriend</button></li>
-                </ul>
-                <h2>Friend Requests</h2>
-                <ul class="friend-request-list">
-                    <li>User 1 <button class="btn-accept">Accept</button> <button class="btn-reject">Reject</button></li>
-                </ul>
-            </nav>
+    <div class="auth-container">
+        <div class="form-wrapper" id="login-wrapper">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p>Don't have an account? <span class="toggle-form" id="show-signup">Sign up</span></p>
         </div>
-        <div class="chat-section">
-            <div class="chat-header">
-                <h2>Global Chat</h2>
-            </div>
-            <div class="chat-messages" id="chat-messages">
-            </div>
-            <div class="chat-input">
-                <input type="text" id="message-input" placeholder="Type a message...">
-                <button id="send-button" class="btn">Send</button>
-            </div>
+
+        <div class="form-wrapper hidden" id="signup-wrapper">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <div class="input-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" placeholder="Choose a username" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <span class="toggle-form" id="show-login">Login</span></p>
         </div>
     </div>
 
     <script>
-        document.getElementById('send-button').addEventListener('click', function() {
-            const message = document.getElementById('message-input').value;
-            if (message) {
-                const messageElement = document.createElement('div');
-                messageElement.className = 'message';
-                messageElement.textContent = message;
-                document.getElementById('chat-messages').appendChild(messageElement);
-                document.getElementById('message-input').value = '';
-            }
+        document.getElementById('show-signup').addEventListener('click', function() {
+            document.getElementById('login-wrapper').classList.add('hidden');
+            document.getElementById('signup-wrapper').classList.remove('hidden');
+        });
+
+        document.getElementById('show-login').addEventListener('click', function() {
+            document.getElementById('signup-wrapper').classList.add('hidden');
+            document.getElementById('login-wrapper').classList.remove('hidden');
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Here you can add validation checks or AJAX calls for real authentication
+            // For this demo, we'll assume login is always successful
+
+            // Redirect to chat page after successful login
+            window.location.href = 'chat.html';
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Here you can add validation checks or AJAX calls for real registration
+            // For this demo, we'll assume signup is always successful
+
+            // Redirect to chat page after successful signup
+            window.location.href = 'chat.html';
         });
     </script>
-    <style>
-        body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chat-container {
-    display: flex;
-    width: 90%;
-    height: 90%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.sidebar {
-    width: 250px;
-    background: #2c3e50;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.sidebar .profile {
-    text-align: center;
-}
-
-.sidebar .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-.sidebar h3 {
-    margin: 10px 0;
-}
-
-.sidebar nav h2 {
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-.friend-list, .friend-request-list {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-.friend-list li, .friend-request-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 14px;
-}
-
-.btn-unfriend, .btn-accept, .btn-reject {
-    background: #e74c3c;
-    border: none;
-    padding: 5px 10px;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 12px;
-    transition: background 0.3s;
-}
-
-.btn-accept {
-    background: #2ecc71;
-}
-
-.btn-reject {
-    background: #e74c3c;
-}
-
-.btn-unfriend:hover, .btn-accept:hover, .btn-reject:hover {
-    opacity: 0.8;
-}
-
-.chat-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-}
-
-.chat-header {
-    background: #007bff;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.chat-messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.chat-messages .message {
-    padding: 10px;
-    background: #f0f0f0;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    max-width: 70%;
-}
-
-.chat-input {
-    display: flex;
-    padding: 10px;
-    background: #f0f0f0;
-    border-top: 1px solid #ddd;
-}
-
-.chat-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.chat-input .btn {
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-    </style>
 </body>
 </html>
